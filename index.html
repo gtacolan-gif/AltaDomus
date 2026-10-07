@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AltaDomus</title>
+<link rel="icon" type="image/png" href="AltaDomus.png">
+<link rel="apple-touch-icon" href="AltaDomus.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
+
+    :root {
+      --barra: 88px;
+      --sfondo: url("Sfondod.png");
+      --colore-fondo: #ffffff;   /* fine pagina bianca */
+
+      /* ▼ COLORI ▼ */
+      --accento: #8ED0D6;                      /* azzurro chiaro del logo AltaDomus */
+      /* Verde petrolio con riflesso diagonale, come nella foto; sempre un po' trasparente (0.9 circa = 10% di trasparenza).
+         Per cambiare l'intensità modifica i tre colori; per la trasparenza cambia i valori 0.88, 0.92 e 0.95 */
+      --pannello: linear-gradient(135deg,
+                    rgba(9, 52, 64, 0.88) 0%,
+                    rgba(4, 30, 40, 0.92) 45%,
+                    rgba(1, 14, 22, 0.95) 100%);
+      --testo-pannello: #E8F7F8;              /* bianco azzurrato: nomi delle lingue leggibili sul verde petrolio */
+    }
+
+    html { background-color: var(--colore-fondo); }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: var(--barra);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background:
+        linear-gradient(to bottom, transparent calc(100% - 180px), var(--colore-fondo) 100%),
+        var(--sfondo) center / cover no-repeat;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: calc(var(--barra) + 32px) 24px 24px;
+    }
+
+    .barra {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: var(--barra);
+      padding: 0 20px;
+      background: var(--pannello);
+      border-bottom: 1px solid rgba(142, 208, 214, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .barra img {
+      height: 120px;
+      width: 120px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .barra h1 {
+      font-family: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+      color: #8ED0D6; /* azzurro di riserva */
+      /* effetto azzurro metallico in rilievo, sfumato come nel logo */
+      background: linear-gradient(180deg, #D2F1F3 0%, #8ED0D6 45%, #4A97A6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
+    }
+
+    @media (max-width: 480px) {
+      :root { --barra: 64px; }
+      .barra { gap: 10px; padding: 0 12px; }
+      .barra img { height: 54px; width: 44px; }
+      .barra h1 { font-size: 1.05rem; letter-spacing: 0.05em; }
+    }
+
+    .riquadro {
+      background: var(--pannello);
+      border: 1px solid rgba(142, 208, 214, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 44px 56px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .lingue {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .lingue a {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      color: var(--testo-pannello);
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .lingue a:hover,
+    .lingue a:focus-visible {
+      background: rgba(255, 255, 255, 0.16);
+      outline: 2px solid var(--accento);
+      outline-offset: -2px;
+    }
+
+    .bandiera {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 24px;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .bandiera svg { display: block; width: 100%; height: 100%; }
+
+    @media (max-width: 480px) {
+      .riquadro { padding: 28px 18px; }
+      .lingue a { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="barra">
+    <img src="AltaDomus.png" alt="Logo AltaDomus Roma">
+    <h1>AltaDomus</h1>
+  </header>
+
+  <main class="riquadro">
+    <ul class="lingue">
+
+      <!-- ITALIANO -->
+      <li>
+        <a href="Domusitaliano.html" hreflang="it" lang="it">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="20" height="40" fill="#009246"/>
+              <rect x="20" width="20" height="40" fill="#fff"/>
+              <rect x="40" width="20" height="40" fill="#CE2B37"/>
+            </svg>
+          </span>
+          Italiano
+        </a>
+      </li>
+
+      <!-- INGLESE -->
+      <li>
+        <a href="Domusinglese.html" hreflang="en" lang="en">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="40" fill="#012169"/>
+              <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="7"/>
+              <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="3"/>
+              <path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="12"/>
+              <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="7"/>
+            </svg>
+          </span>
+          English
+        </a>
+      </li>
+
+      <!-- SPAGNOLO -->
+      <li>
+        <a href="Domusspagnolo.html" hreflang="es" lang="es">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="40" fill="#AA151B"/>
+              <rect y="10" width="60" height="20" fill="#F1BF00"/>
+            </svg>
+          </span>
+          Español
+        </a>
+      </li>
+
+      <!-- FRANCESE -->
+      <li>
+        <a href="Domusfrancese.html" hreflang="fr" lang="fr">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="20" height="40" fill="#002395"/>
+              <rect x="20" width="20" height="40" fill="#fff"/>
+              <rect x="40" width="20" height="40" fill="#ED2939"/>
+            </svg>
+          </span>
+          Français
+        </a>
+      </li>
+
+      <!-- TEDESCO -->
+      <li>
+        <a href="Domustedesco.html" hreflang="de" lang="de">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="13.3" fill="#000"/>
+              <rect y="13.3" width="60" height="13.3" fill="#DD0000"/>
+              <rect y="26.6" width="60" height="13.4" fill="#FFCE00"/>
+            </svg>
+          </span>
+          Deutsch
+        </a>
+      </li>
+
+      <!-- CINESE -->
+      <li>
+        <a href="Domuscinese.html" hreflang="zh" lang="zh">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="40" fill="#EE1C25"/>
+              <polygon points="10,4 12,9 17,9 13,12 14,17 10,14 6,17 7,12 3,9 8,9" fill="#FFFF00"/>
+            </svg>
+          </span>
+          中文 (Zhongwen)
+        </a>
+      </li>
+
+      <!-- COREANO -->
+      <li>
+        <a href="Domuscoreano.html" hreflang="ko" lang="ko">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="40" fill="#fff"/>
+              <circle cx="30" cy="20" r="10" fill="#C60C30"/>
+              <path d="M20,20 a10,10 0 0,0 20,0" fill="#003478"/>
+            </svg>
+          </span>
+          한국어 (Korean)
+        </a>
+      </li>
+
+      <!-- ARABO -->
+      <li>
+        <a href="Domusarabo.html" hreflang="ar" lang="ar">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="13.3" fill="#00732F"/>
+              <rect y="13.3" width="60" height="13.3" fill="#FFF"/>
+              <rect y="26.6" width="60" height="13.4" fill="#000"/>
+              <rect width="17" height="40" fill="#FF0000"/>
+            </svg>
+          </span>
+          العربية (Arabic)
+        </a>
+      </li>
+
+      <!-- RUSSO -->
+      <li>
+        <a href="Domusrusso.html" hreflang="ru" lang="ru">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="13.3" fill="#FFF"/>
+              <rect y="13.3" width="60" height="13.3" fill="#0039A6"/>
+              <rect y="26.6" width="60" height="13.4" fill="#D52B1E"/>
+            </svg>
+          </span>
+          Русский (Russian)
+        </a>
+      </li>
+
+      <!-- PORTOGHESE -->
+      <li>
+        <a href="Domusportoghese.html" hreflang="pt-PT" lang="pt-PT">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="24" height="40" fill="#006600"/>
+              <rect x="24" width="36" height="40" fill="#FF0000"/>
+              <circle cx="24" cy="20" r="8" fill="#FFFF00"/>
+            </svg>
+          </span>
+          Português (PT)
+        </a>
+      </li>
+
+      <!-- BRASILIANO -->
+      <li>
+        <a href="Domusbrasiliano.html" hreflang="pt-BR" lang="pt-BR">
+          <span class="bandiera" aria-hidden="true">
+            <svg viewBox="0 0 60 40" preserveAspectRatio="none">
+              <rect width="60" height="40" fill="#009C3B"/>
+              <polygon points="30,4 54,20 30,36 6,20" fill="#FFDF00"/>
+              <circle cx="30" cy="20" r="9" fill="#002776"/>
+            </svg>
+          </span>
+          Português (BR)
+        </a>
+      </li>
+
+    </ul>
+  </main>
+
+</body>
+</html>
